@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | DEAN</title>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="mb-3">
+
+<div class="container-fluid mt-5">
+    <div class="row">
+        <div class="col-md-3 col-lg-2 sidebar mb-3">
+            <div class="list-group">
+                <a th:href="@{/dean}" class="list-group-item active">Dashboard</a>
+                <a th:href="@{/dean/lecturers}" class="list-group-item">Lecturers</a>
+                <a th:href="@{/dean/memos/inbox}" class="list-group-item">Inbox</a>
+                <a th:href="@{/dean/memos/sent}" class="list-group-item">Sent</a>
+                <a th:href="@{/dean/issues/add}" class="list-group-item">Report Issue</a>
+                <a th:href="@{/dean/settings}" class="list-group-item">Settings</a>
+                <div class="list-group-item">
+                    <form th:action="@{/logout}" method="post">
+                        <button type="submit"  class="btn btn-danger">Log Out</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9 col-lg-10 main">
+            <h1>DEAN Dashboard</h1>
+            <h2 class="card-title mt-2">Welcome! <span th:text="${fullName}"></span></h2>
+            <h4>School/Faculty of <span th:text="${faculty}"></span> </h4>
+            <div class="row mb-5">
+                <div class="col">
+                    <div class="card">
+                        <a th:href="@{/dean/memos/send}" class="card-body">
+                            <h5 class="card-title">Create Memo</h5>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Recent Memos</h5>
+                            <ul class="list-group list-group-flush">
+                                <li th:each="memo : ${recentMemos}" class="list-group-item recent-memos">
+                                    <a th:href="@{/dean/memos/view/{id}(id=${memo.id})}" th:text="${memo.title}"></a>
+                                    <p style="font-size: 1.2rem" th:utext="${#strings.abbreviate(memo.content, 200)}"></p>
+                                    <span>Sent by:</span><p th:text="${memo.sender.roles}"></p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | ADMIN</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="mb-3">
+
+<div class="container-fluid mt-5">
+    <div class="row">
+        <div class="col-md-3 col-lg-2 sidebar mb-3">
+            <div class="list-group">
+                <a th:href="@{/admin}" class="list-group-item active">Dashboard</a>
+                <a th:href="@{/admin/users}" class="list-group-item">Users</a>
+                <a th:href="@{/admin/memos}" class="list-group-item">Memos</a>
+                <a th:href="@{/admin/issues}" class="list-group-item">Issues</a>
+
+                <div class="list-group-item">
+                    <form th:action="@{/logout}" method="post">
+                        <button type="submit"  class="btn btn-danger">Log Out</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9 col-lg-10 main">
+            <h1>Admin Dashboard</h1>
+            <h2 class="card-title mt-2">Welcome! <span th:text="${fullName}"></span></h2>
+
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Total Users</h5>
+                            <p class="card-text" id="totalUsers" th:text="${totalUsers}"></p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div> <br>
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <a th:href="@{/admin/memos/add}">
+                                <h5 class="card-title">Create Memo</h5>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <a th:href="@{/admin/users/add}">
+                                <h5 class="card-title">Create User</h5>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

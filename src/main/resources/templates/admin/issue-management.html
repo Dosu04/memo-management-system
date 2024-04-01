@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Issue Management | ADMIN</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div th:if="${successMessageIssueAdded}">
+    <div class="alert alert-success text-center" role="alert">
+        <strong th:text="${successMessageIssueAdded}"></strong>
+    </div>
+</div>
+
+<div th:if="${successMessageIssueDeleted}">
+    <div class="alert alert-success text-center" role="alert">
+        <strong th:text="${successMessageIssueDeleted}"></strong>
+    </div>
+</div>
+
+<div th:if="${errorMessageIssueNotFound}">
+    <div class="alert alert-danger text-center" role="alert">
+        <strong th:text="${errorMessageIssueNotFound}"></strong>
+    </div>
+</div>
+
+<div class="container-fluid mt-5">
+    <a th:href="@{/admin}" class="btn btn-secondary mb-3">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5"/>
+        </svg>
+    </a>
+    <!-- Search form -->
+    <form class="form-inline mb-3" th:action="@{/admin/issues/search}" method="get">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="keyword">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="issue : ${issues}">
+            <td th:text="${issue.title}"></td>
+            <td>
+                <a th:href="@{/admin/issues/{id}(id=${issue.id})}" class="btn btn-primary">View</a>
+
+                <form th:action="@{/admin/issues/delete/{id}(id=${issue.id})}" method="post" style="display:inline">
+                    <input type="hidden" name="_method" value="DELETE" />
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

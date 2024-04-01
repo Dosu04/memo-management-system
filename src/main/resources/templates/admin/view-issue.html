@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Issue Details | ADMIN</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container mt-5 mb-5">
+  <a th:href="@{/admin/issues}" class="btn btn-secondary mb-3">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
+      <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5"/>
+    </svg>
+  </a>
+  <div class="card">
+    <div class="card-header" th:text="${issue.title}">Issue Title</div>
+    <div class="card-body">
+      <h5 class="card-title" th:text="'Sender: ' + ${issue.sender.surname} + ' ' + ${issue.sender.name} + ' ' + ${issue.sender.otherName} + ' ' + ${issue.sender.roles}"></h5>
+      <p class="card-text" th:utext="${issue.description}"></p>
+
+      <footer class="blockquote-footer">Sent on <span class="formatted-date" th:text="${issue.createdAt}">Date</span></footer>
+    </div>
+
+  </div>
+
+
+</div>
+
+<script th:inline="javascript">
+  $(document).ready(function() {
+      var rawDateTime = /*[[${issue.createdAt}]]*/ 'defaultDateTime';
+      var formattedDateTime = moment(rawDateTime).format('MMMM Do YYYY, h:mm a');
+      $('.formatted-date').text(formattedDateTime);
+  });
+</script>
+
+</body>
+</html>

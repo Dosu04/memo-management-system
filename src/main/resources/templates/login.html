@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+<div th:if="${param.logout}">
+    <div class="alert alert-success text-center" role="alert">
+       <p>You have been successfully logged out. Have a great day!</p>
+    </div>
+</div>
+
+<div th:if="${param.error}">
+    <div class="alert alert-danger text-center" role="alert">
+        <p >Invalid username or password. Please try again.</p>
+    </div>
+</div>
+
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="text-center mb-4">Login</h2>
+
+                    <form th:action="@{/login}" method="post">
+                        <div class="form-group">
+                            <label for="username">Username:</label>
+                            <input type="text" class="form-control" id="username" name="username" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+
+                        <button type="submit" value="" class="btn btn-primary btn-block">Login</button>
+                    </form>
+
+                    <hr>
+
+                    <p class="text-center mb-3">login as:</p>
+                    <div class="btn-group d-flex justify-content-center" role="group">
+                        <a href="/" class="btn btn-primary mr-2">Lecturer</a>
+                        <a href="/hod" class="btn btn-primary mr-2">HOD</a>
+                        <a href="/dean" class="btn btn-primary">DEAN</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

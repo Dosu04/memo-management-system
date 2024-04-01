@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecturers | DEAN</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container-fluid mt-5">
+    <a th:href="@{/dean}" class="btn btn-secondary mb-3"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5"/>
+    </svg></a>
+
+
+    <h2>Lecturers in the School/Faculty of <span th:text="${faculty}"></span></h2>
+    <!-- Search form -->
+    <form th:action="@{/dean/lecturers/search}" method="get" class="form-inline mb-3">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="keyword">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>Surname</th>
+            <th>Name</th>
+            <th>Other Name</th>
+            <th>Department</th>
+            <th>Roles</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.surname}"></td>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.otherName}"></td>
+            <td th:text="${user.department.name}"></td>
+            <td th:each="role : ${user.roles}" th:text="${role.name}"></td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

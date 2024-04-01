@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create User | ADMIN</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+    <a th:href="@{/admin/users}" class="btn btn-secondary mb-3"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5"/>
+    </svg></a>
+
+    <h2>Create User</h2>
+
+    <form th:action="@{/admin/users/add}" th:object="${user}" method="post">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" th:field="*{username}" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" th:field="*{password}" required>
+        </div>
+        <div class="form-group">
+            <label for="surname">Surname</label>
+            <input type="text" class="form-control" id="surname" th:field="*{surname}" required>
+        </div>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" th:field="*{name}" required>
+        </div>
+        <div class="form-group">
+            <label for="otherName">Other Name</label>
+            <input type="text" class="form-control" id="otherName" th:field="*{otherName}">
+        </div>
+        <div class="form-group">
+            <label for="faculty">Faculty</label>
+            <select class="form-control" id="faculty" th:field="*{faculty}">
+                <option value="">Select Faculty</option>
+                <option th:each="fac : ${faculties}" th:value="${fac.id}" th:text="${fac.name}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="department">Department</label>
+            <select class="form-control" id="department" th:field="*{department}">
+                <option value="">Select Department</option>
+                <option th:each="dept : ${departments}" th:value="${dept.id}" th:text="${dept.name}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Roles</label><br>
+            <div th:each="role : ${roles}" class="form-control mb-3">
+                <input class="form-check-input" type="radio" th:id="${'role' + role.id}" th:name="roles" th:value="${role.id}">
+                <label class="form-check-label" th:for="${'role' + role.id}" th:text="${role.name}"></label>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary mb-3">Create User</button>
+    </form>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Memo | HOD</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+<body>
+
+<div class="container mt-5">
+  <a href="#" onclick="history.back()" class="btn btn-secondary mb-3"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5"/>
+  </svg></a>
+  <h2>Add Memo</h2>
+  <form th:action="@{/hod/memos/send}" th:object="${memo}" method="post">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" class="form-control" id="title" th:field="*{title}" required>
+    </div>
+    <div class="form-group">
+      <label for="content">Content</label>
+      <div id="editor" style="height: 300px;"></div>
+      <input type="hidden" id="content" name="content" th:value="*{content}" required>
+    </div>
+
+    <input type="hidden" id="senderId" name="sender.id" th:value="${hodId}">
+    <input type="hidden" id="senderUsername" name="sender.username" th:value="${hodUsername}">
+    <input type="hidden" id="memoSenderDepartment" name="memoSenderDepartment" th:value="${memoSenderDepartment}">
+    <input type="hidden" id="memoSenderFaculty" name="memoSenderFaculty" th:value="${memoSenderFaculty}">
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+
+<script>
+  $(document).ready(function() {
+    // Initialize Quill
+    var quill = new Quill('#editor', {
+      theme: 'snow', // or 'bubble' for a bubble theme
+    });
+
+    // Set initial content from thymeleaf model
+    quill.clipboard.dangerouslyPasteHTML($('#content').val());
+
+    // Listen for content changes and update the hidden input
+    quill.on('text-change', function() {
+      $('#content').val(quill.root.innerHTML);
+    });
+
+    // Rest of your existing code
+    $('#recipientsDropdown').on('change', function() {
+      // ... (your existing code)
+    });
+  });
+</script>
+
+</body>
+</html>

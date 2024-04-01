@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings | DEAN</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5 mb-5">
+    <a href="#" onclick="history.back()" class="btn btn-secondary mb-3">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5"/>
+        </svg>
+    </a>
+    <h2>Profile Settings</h2>
+    <div class="row">
+        <div class="col-md-6">
+
+            <ul class="list-group">
+                <li class="list-group-item"><strong>Username:</strong> <span th:text="${user.username}"></span></li>
+                <li class="list-group-item"><strong>Surname:</strong> <span th:text="${user.surname}"></span></li>
+                <li class="list-group-item"><strong>Name:</strong> <span th:text="${user.name}"></span></li>
+                <li class="list-group-item"><strong>Othername:</strong> <span th:text="${user.otherName}"></span></li>
+                <li class="list-group-item"><strong>Role:</strong> <span th:text="${user.roles}"></span></li>
+                <li class="list-group-item"><strong>Faculty:</strong> <span th:text="${user.faculty.name}"></span></li>
+                <li class="list-group-item"><strong>Department:</strong> <span th:text="${user.department.name}"></span></li>
+            </ul>
+
+        </div>
+    </div>
+
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <h3>Change Password</h3>
+            <form th:action="@{/dean/settings/update-password}" method="post" th:object="${user}">
+
+                <div class="form-group">
+                    <label for="updatePassword">Update Password</label>
+                    <input type="password" id="updatePassword" name="password" class="form-control" placeholder="New Password">
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
